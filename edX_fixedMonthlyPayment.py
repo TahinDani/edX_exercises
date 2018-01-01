@@ -9,17 +9,22 @@
 
 
 def fixedMonthlyPayment(balance, annualInterestRate):
-    MinimumFixedMonthlyPayment = 0
-    PreviousBalance = balance
-    MonthlyUnpaidBalance = balance
-    while PreviousBalance > 0:
-        MinimumFixedMonthlyPayment += 10
+    previous_balance = balance
+    monthly_interest_rate = annualInterestRate / 12
+    fixed_monthly_payment = 0
+    while previous_balance > 0:
+        # if debt not payable with previous fixed_montly_payment increase it by 10 and reset balance to original
+        fixed_monthly_payment += 10
+        previous_balance = balance
+        # try to pay the debt with current fixed_monthy_payment in 12 months:
         for i in range(12):
-            MonthlyInterestRate = annualInterestRate/12
-            MonthlyUnpaidBalance = PreviousBalance - MinimumFixedMonthlyPayment
-            PreviousBalance = MonthlyUnpaidBalance + MonthlyInterestRate * MonthlyUnpaidBalance
-        
-    return MinimumFixedMonthlyPayment
+            monthly_unpaid_balance = previous_balance - fixed_monthly_payment
+            updated_balance = monthly_unpaid_balance + (monthly_unpaid_balance * monthly_interest_rate)
+            previous_balance = updated_balance
+            if previous_balance < 0:
+                print("Lowest Payment: " + str(fixed_monthly_payment))
+                break
 
-print(fixedMonthlyPayment(3329, 0.2))
-print(fixedMonthlyPayment(4773, 0.2))
+fixedMonthlyPayment(3329, 0.2) #310
+fixedMonthlyPayment(4773, 0.2) #440
+fixedMonthlyPayment(3926, 0.2) #360
