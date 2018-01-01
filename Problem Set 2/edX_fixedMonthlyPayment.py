@@ -21,9 +21,9 @@ def fixedMonthlyPayment(balance, annualInterestRate):
             monthly_unpaid_balance = previous_balance - fixed_monthly_payment
             updated_balance = monthly_unpaid_balance + (monthly_unpaid_balance * monthly_interest_rate)
             previous_balance = updated_balance
-            if previous_balance < 0:
-                print("Lowest Payment: " + str(fixed_monthly_payment))
-                break
+        if previous_balance < 0:
+            print("Lowest Payment: " + str(fixed_monthly_payment))
+            break
 
 fixedMonthlyPayment(3329, 0.2) #310
 fixedMonthlyPayment(4773, 0.2) #440
