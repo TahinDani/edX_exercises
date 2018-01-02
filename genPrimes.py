@@ -25,10 +25,10 @@ print(next(foo))
 print(next(foo))
 print(next(foo))
 
-def genPrimes2():
+def genPrimes2(n):
     primes = []
     x = 2
-    for i in range(60):
+    for i in range(n-1):
         for p in primes:
             if (x % p) == 0:
                 break
@@ -37,4 +37,4 @@ def genPrimes2():
         x += 1
     print(primes)
         
-genPrimes2()
+genPrimes2(3)
